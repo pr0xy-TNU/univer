@@ -1,0 +1,32 @@
+package com.javarush.test.level18.lesson10.home01;
+
+/* Английские буквы
+В метод main первым параметром приходит имя файла.
+Посчитать количество букв английского алфавита, которое есть в этом файле.
+Вывести на экран число (количество букв)
+Закрыть потоки. Не использовать try-with-resources
+*/
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
+public class Solution
+{
+    public static void main(String[] args) throws IOException
+    {
+        String fileName = args[0];
+
+        FileInputStream inputStream = new FileInputStream(fileName);
+
+
+        int coutn = 0;
+        while (inputStream.available() > 0)
+        {
+            int content = inputStream.read();
+            if ((content > 96 && content < 123) || (content > 64 && content < 91))
+                coutn++;
+        }
+        inputStream.close();
+        System.out.println(coutn);
+    }
+}

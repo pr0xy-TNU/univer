@@ -1,0 +1,121 @@
+package com.javarush.test.level14.lesson06.home01;
+
+/* Куриная фабрика
+Написать Фабрику(Factory) по производству кур(Hen)
+1. Создать класс Hen
+1.1. Сделать его абстрактным
+1.2. Добавить в класс абстрактный метод  int getCountOfEggsPerMonth()
+1.3. Добавить в класс метод String getDescription(), который возвращает строку "Я курица."
+
+2. Создать класс RussianHen, который наследуется от Hen
+3. Создать класс UkrainianHen, который наследуется от Hen
+4. Создать класс MoldovanHen, который наследуется от Hen
+5. Создать класс BelarusianHen, который наследуется от Hen
+
+6. В каждом из четырех последних классов написать свою реализацию метода getCountOfEggsPerMonth.
+Методы должны возвращать количество яиц в месяц от данного типа куриц.
+
+7. В каждом из четырех последних классов написать свою реализацию метода getDescription.
+Методы должны возвращать строку вида:
+<getDescription() родительского класса>  + <" Моя страна - Sssss. Я несу N яиц в месяц.">
+где Sssss - название страны
+где N - количество яиц в месяц
+
+8. В классе HenFactory реализовать метод getHen, который возвращает соответствующую стране породу кур
+9. Все созданные вами классы должны быть в отдельных файлах
+*/
+
+public class Solution
+{
+    public static class RussianHen extends Hen
+    {
+
+        @Override
+        public int getCountOfEggsPerMonth()
+        {
+            return 70;
+        }
+
+        @Override
+        public String getDescription()
+        {
+            return super.getDescription() + " Моя страна - " + Country.RUSSIA + ". Я несу " + this.getCountOfEggsPerMonth() +" яиц в месяц.";
+        }
+    }
+    public static class UkrainianHen extends Hen
+    {
+
+        @Override
+        public int getCountOfEggsPerMonth()
+        {
+            return 40;
+        }
+        @Override
+        public String getDescription()
+        {
+            return super.getDescription() + " Моя страна - " + Country.UKRAINE + ". Я несу " + this.getCountOfEggsPerMonth() +" яиц в месяц.";
+        }
+    }
+    public static class MoldovanHen extends Hen
+    {
+
+        @Override
+        public int getCountOfEggsPerMonth()
+        {
+            return 1000;
+        }
+        @Override
+        public String getDescription()
+        {
+            return super.getDescription() + " Моя страна - " + Country.MOLDOVA + ". Я несу " + this.getCountOfEggsPerMonth() +" яиц в месяц.";
+        }
+    }
+    public static class BelarusianHen extends Hen
+    {
+        @Override
+        public int getCountOfEggsPerMonth()
+        {
+            return 80;
+        }
+
+        @Override
+        public String getDescription()
+        {
+            return super.getDescription() + " Моя страна - " + Country.BELARUS + ". Я несу " + this.getCountOfEggsPerMonth() +" яиц в месяц.";
+        }
+
+    }
+
+
+    public static void main(String[] args)
+    {
+       Hen hen = HenFactory.getHen(Country.BELARUS);
+       hen.getCountOfEggsPerMonth();
+    }
+
+    static class HenFactory {
+
+        static Hen getHen(String country)
+        {
+            Hen hen = null;
+            switch (country)
+            {
+                case Country.BELARUS:
+                    hen = new BelarusianHen();
+                    break;
+                case Country.MOLDOVA:
+                    hen = new MoldovanHen();
+                    break;
+                case Country.RUSSIA:
+                    hen = new RussianHen();
+                    break;
+                case Country.UKRAINE:
+                    hen = new UkrainianHen();
+                    break;
+            }
+
+            return hen;
+        }
+    }
+
+}
