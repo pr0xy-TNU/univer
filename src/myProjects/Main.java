@@ -1,52 +1,59 @@
 package myProjects;
 
+
 import java.io.*;
 
-import static myProjects.net.util.MyUtil.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.Buffer;
+import java.util.*;
 
 
-public class Main
-{
+public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static final String IN_FILE = "F:/in.txt";
+    public static final String OUT_FILE = "F:/out.txt";
 
-        byte[] bytes = new byte[]{(byte) 192, (byte) 168, 12};
 
-        System.out.println((byte)192);
-        byte b1 = (byte)5;
-        String s1 = String.format("%8s", Integer.toBinaryString(b1 & 0xFF)).replace(' ', '0');
-        System.out.println(s1);
-
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        Calendar calendar = Calendar.getInstance();
+        System.out.println(String.format("%tA, %<tB", calendar));
 
     }
-
 
 
 /*
         StringBuilder builder = new StringBuilder();
         builder.append("Lena").append('\n');
         String date = builder.toString();
-
         InputStream is = new ByteArrayInputStream(date.getBytes());
         System.setIn(is);
 
-
-
+         Integer i=675;
+        double root;
+        root = Math.sqrt(i);
+        System.out.printf("Корень числа %d равен %1f", i, root );
 
     }
 
-    public static void readAndPrintLine() throws IOException {
-        InputStreamReader inputStreamReader = new InputStreamReader(System.in);
-        BufferedReader reader = new BufferedReader(inputStreamReader);
-        while (true) {
-
-            String content = reader.readLine();
-
-
-
-        }
-
 
     }*/
-
 }
+
+ /* for (int i = 0; i < inList.size(); i++) {
+
+            char lastChar = inList.get(i).charAt(inList.get(i).length() - 1);
+
+            for (int j = 0; j < inList.size(); j++) {
+                char firstChar = inList.get(j).charAt(inList.get(j).length() - 1);
+
+                if (lastChar == firstChar) {
+                    outList.add(inList.get(j));
+                    inList.remove(inList.get(j));
+                } else {
+                    outList.add(inList.get(j));
+                    inList.remove(inList.get(j));
+                }
+
+            }
+        }*/

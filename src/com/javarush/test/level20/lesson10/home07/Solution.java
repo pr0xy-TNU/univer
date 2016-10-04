@@ -17,6 +17,7 @@ import java.io.*;
 public class Solution implements Serializable, AutoCloseable {
     private transient FileOutputStream stream;
     private String fileName;
+
     public Solution(String fileName) throws FileNotFoundException {
         this.fileName = fileName;
         this.stream = new FileOutputStream(fileName);
@@ -28,13 +29,11 @@ public class Solution implements Serializable, AutoCloseable {
         stream.flush();
     }
 
-    private void writeObject(ObjectOutputStream out) throws Exception
-    {
+    private void writeObject(ObjectOutputStream out) throws Exception {
         out.defaultWriteObject();
     }
 
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException
-    {
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
         stream = new FileOutputStream(this.fileName, true);
     }
