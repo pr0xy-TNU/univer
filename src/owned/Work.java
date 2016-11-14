@@ -45,10 +45,7 @@ public class Work {
         }
 
         public boolean equalPoint2D(Point2D value) {
-            if ((this.getX() == value.getX()) && (this.getY() == value.getY()))
-                return true;
-            else
-                return false;
+            return (this.getX() == value.getX()) && (this.getY() == value.getY());
         }
     }
 
@@ -142,11 +139,7 @@ public class Work {
             printList(class2ArrayList, 2, class2Point2D);
 
             position = 0;
-            if (class1Point2D.equalPoint2D(class1LastPoint) && class2Point2D.equalPoint2D(class2LastPoint)) {
-                flag = false;
-            } else {
-                flag = true;
-            }
+            flag = !(class1Point2D.equalPoint2D(class1LastPoint) && class2Point2D.equalPoint2D(class2LastPoint));
 
             if (!flag) {
                 class1TotalList = new ArrayList<>(class1ArrayList);

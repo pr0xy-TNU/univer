@@ -4,7 +4,8 @@ import univer.Dilucheva.Grafics.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Random;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by Yarik on 12.10.2016.
@@ -13,7 +14,7 @@ public class Canvas extends JComponent {
     private Frame frame;
     private Graphics2D g2D;
     public static final int PADDING = 50;
-    public final int SCALE = 2;
+    public final int SCALE = 5;
     private Point X0Y0;
 
     public Canvas(Frame frame) {
@@ -31,20 +32,44 @@ public class Canvas extends JComponent {
         g2D.setPaint(Color.BLACK);
         drawXY();
         drawCanvas();
-        Random random = new Random();
-        for (int i = -100; i < 100; i++) {
-            drawPoint(i, MainPanel.func(i));
+        java.util.List<Double> listX = MainPanel.getDotsX();
+        java.util.List<Double> listY = MainPanel.getDotsY();
+        java.util.List<Double> omegaX = MainPanel.getOmegaX();
+        java.util.List<Double> omegaY = MainPanel.getOmegaY();
+        java.util.List<Double> omegaZ = MainPanel.getOmegaZ();
+
+        for (int i = 0; i < listX.size(); i++) {
+            drawPoint(listX.get(i) * SCALE, listY.get(i) * SCALE);
         }
+        int[] polygoneY = new int[listX.size()];
+        int[] polygoneX = new int[listX.size()];
+        /*for (int j = 0; j < omegaX.size(); j++) {
+            Random r = new Random();
+            g2D.setPaint(new Color(150 + r.nextInt(100), 100 + r.nextInt(150), 100 + r.nextInt(150)));
+
+        }*/
+
+        for (int i = 0; i < omegaX.size(); i++) {
+            double result = SCALE * (omegaX.get(i) * i + omegaY.get(i) + omegaZ.get(i));
+            polygoneY[i] = (int)result * SCALE + X0Y0.getpY();
+            polygoneX[i] = i* SCALE + X0Y0.getpX();
+        }
+        g2D.drawPolyline(polygoneX, polygoneY, polygoneX.length);
 
 
+        //g2D.drawLine(100, 100, 200, 200);
 
 
     }
 
-    public void drawPoint(int x, int y) {
+    public void drawLine(double x1, double y1, double x2, double y2) {
+        g2D.drawLine(X0Y0.getpX() + (int) x1, X0Y0.getpY() + (int) y1, X0Y0.getpX() + (int) x2, X0Y0.getpY() - (int) y2);
+    }
+
+    public void drawPoint(double x, double y) {
         g2D.setColor(Color.red);
         g2D.setStroke(new BasicStroke(2.9f));
-        g2D.drawRect(X0Y0.getpX() + x, X0Y0.getpY() - y, 2, 2);
+        g2D.drawRect(X0Y0.getpX() + (int) x, X0Y0.getpY() - (int) y, 2, 2);
     }
 
 
